@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,7 +40,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.example.ui.components.ErrorRetryView
 import com.example.ui.components.SplashScreenView
 import com.example.ui.model.WebViewUiState
-import com.example.ui.theme.YouTubeBlack
 import com.example.ui.theme.YouTubeRed
 import com.example.util.NetworkMonitor
 import kotlinx.coroutines.delay
@@ -62,9 +63,9 @@ fun YouTubeMainScreen(
     val networkMonitor = remember { NetworkMonitor(context) }
     val isOnline by networkMonitor.isOnline.collectAsState(initial = true)
 
-    // Automatically fade splash screen as soon as loading starts or after a brief safety timeout
+    // Automatically fade splash screen after smooth entrance animation completes
     LaunchedEffect(Unit) {
-        delay(1200)
+        delay(1400)
         uiState = uiState.copy(isInitialSplash = false)
     }
 
@@ -126,7 +127,9 @@ fun YouTubeMainScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(YouTubeBlack)
+            .background(Color.White)
+            .statusBarsPadding()
+            .navigationBarsPadding()
     ) {
         // Direct Native YouTube WebView (Full screen, no headers, no extra buttons)
         YouTubeWebView(
@@ -135,7 +138,7 @@ fun YouTubeMainScreen(
                     progress = progress,
                     isLoading = progress < 100
                 )
-                if (progress > 30 && uiState.isInitialSplash) {
+                if (progress > 40 && uiState.isInitialSplash) {
                     uiState = uiState.copy(isInitialSplash = false)
                 }
             },
@@ -201,7 +204,7 @@ fun YouTubeMainScreen(
             )
         }
 
-        // Minimal Splash Screen during initial boot
+        // Animated Splash Screen during initial boot with white background
         AnimatedVisibility(
             visible = uiState.isInitialSplash,
             enter = fadeIn(),
@@ -210,7 +213,7 @@ fun YouTubeMainScreen(
             SplashScreenView()
         }
 
-        // Fullscreen Video Player (HTML5 / YouTube Custom View)
+        // Fullscreen Video Player (HTML5 / YouTube Custom View without insets)
         customView?.let { fullView ->
             Box(
                 modifier = Modifier

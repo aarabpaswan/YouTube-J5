@@ -14,8 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.example.ui.YouTubeMainScreen
-import com.example.ui.theme.YouTubeBlack
 import com.example.ui.theme.YouTubeJ5Theme
 
 class MainActivity : ComponentActivity() {
@@ -54,10 +54,10 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            YouTubeJ5Theme(darkTheme = true) {
+            YouTubeJ5Theme(darkTheme = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = YouTubeBlack
+                    color = Color.White
                 ) {
                     YouTubeMainScreen(
                         onOpenFileChooser = { callback, params ->

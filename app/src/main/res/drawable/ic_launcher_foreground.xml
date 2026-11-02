@@ -3,6 +3,6 @@
     <item
         android:width="66dp"
         android:height="66dp"
-        android:drawable="@drawable/official_yt_logo_1793631994316"
+        android:drawable="@drawable/yt_logo_white_bg_1793632296347"
         android:gravity="center" />
 </layer-list>
