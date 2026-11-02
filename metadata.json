@@ -1,0 +1,6 @@
+{
+  "name": "YouTube J5",
+  "description": "Native YouTube mobile web application for Samsung Galaxy J5 (Android 7.1.1) with full video playback, account login, and back navigation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
